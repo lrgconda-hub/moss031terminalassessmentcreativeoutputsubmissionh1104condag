@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Gising Pa? — A little book about sleep</title>
+<meta name="description" content="An illustrated storybook about nighttime phone use and sleep loss among young Filipino adults.">
+<meta name="theme-color" content="#EDE7F4">
+<meta property="og:title" content="Gising Pa? — Still awake?">
+<meta property="og:description" content="A little illustrated book about the sleep we mean to get, and the sleep we actually get.">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   GISING PA?  —  a little picture book
+   ============================================================ */
+:root{
+  --ink:      #4B3A55;
+  --ink-soft: #7A6684;
+  --leaf-w: min(95vw, 660px);
+  --leaf-h: min(84vh, 900px);
+  --leaf-h: min(84dvh, 900px);
+
+  --s--1: clamp(0.8rem, 0.76rem + 0.2vw, 0.9rem);
+  --s-0:  clamp(1rem, 0.94rem + 0.32vw, 1.16rem);
+  --s-1:  clamp(1.3rem, 1.08rem + 0.9vw, 1.75rem);
+  --s-2:  clamp(2.3rem, 1.5rem + 3.4vw, 4rem);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{height:100%}
+
+body{
+  margin:0;
+  font-family:"Nunito",system-ui,sans-serif;
+  background:#E7E1F2;
+  color:var(--ink);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:1rem;padding:1rem .9rem 1.3rem;
+  min-height:100vh; min-height:100dvh;
+  overflow-y:auto;overflow-x:hidden;
+  transition:background 950ms ease;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ---------------- book ---------------- */
+.book{position:relative;width:var(--leaf-w);height:var(--leaf-h);perspective:2300px;perspective-origin:80% 50%}
+.book::before{content:"";position:absolute;inset:7px -8px -9px 3px;border-radius:4px 16px 16px 4px;background:rgba(255,255,255,.5);z-index:0;box-shadow:0 18px 40px -18px rgba(75,58,85,.4)}
+
+.leaf{
+  position:absolute;inset:0;
+  transform-origin:left center;transform-style:preserve-3d;backface-visibility:hidden;
+  transition:transform 780ms cubic-bezier(.36,.06,.16,1);
+  border-radius:4px 16px 16px 4px;overflow:hidden;
+  display:flex;flex-direction:column;
+  background:var(--panel,#FBF5EC);
+  color:var(--ink);
+  box-shadow:0 24px 55px -20px rgba(75,58,85,.45);
+}
+.leaf::before{content:"";position:absolute;top:0;bottom:0;left:0;width:clamp(12px,3vw,20px);
+  background:linear-gradient(90deg,rgba(75,58,85,.18),rgba(75,58,85,0));pointer-events:none;z-index:6}
+.leaf::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:5;opacity:.07;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='150' height='150'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/></filter><rect width='150' height='150' filter='url(%23n)'/></svg>")}
+.leaf.is-turned{transform:rotateY(-179deg)}
+
+/* ---------------- full-bleed scene ---------------- */
+.art{flex:0 0 auto;height:48%;width:100%;position:relative;overflow:hidden;background:var(--artbg,transparent);transition:background 300ms ease}
+.leaf.cover .art{height:56%}
+.art svg{width:100%;height:100%;display:block}
+/* soft fade where the picture meets the paper */
+.art::after{content:"";position:absolute;left:0;right:0;bottom:0;height:26px;z-index:2;
+  background:linear-gradient(to bottom, transparent, var(--panel,#FBF5EC))}
+
+/* ---------------- storybook palette ---------------- */
+.hair    {fill:#4E3B54}
+.hair-lo {fill:#5F4A66}
+.skin    {fill:#F2C7A6}
+.skin-lo {fill:#E2AE8A}
+.blush   {fill:#EE9C9C;opacity:.5}
+.eye     {fill:#3E3047}
+.screen  {fill:#EAF4FC}
+.glow    {fill:#EAF4FC;opacity:.3}
+.sheet   {fill:#FAEDE9}
+.quilt   {fill:#F0B2BD}
+.quilt-lo{fill:#E098A6}
+.wood    {fill:#CFA184}
+.wood-lo {fill:#B88467}
+.moon    {fill:#FCF1D6}
+.plant   {fill:#9DC59B}
+.pot     {fill:#DFA98A}
+.stroke  {fill:none;stroke:#4E3B54;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;opacity:.42}
+.stroke-s{fill:none;stroke:#4E3B54;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;opacity:.22}
+.zzz     {font-family:"Baloo 2",cursive;font-size:11px;font-weight:700;fill:#8E7FA8;opacity:.7}
+.tag     {font-family:"Baloo 2",cursive;font-size:9px;font-weight:700;fill:#6B5878;opacity:.75}
+.tag.hot {fill:#E08769;opacity:1}
+
+/* ---------------- text ---------------- */
+.leaf-body{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;justify-content:center;justify-content:safe center;gap:.8rem;
+  padding:0 clamp(1.3rem,4vw,2.5rem) 0 clamp(1.7rem,5vw,3rem);position:relative;z-index:3}
+
+.clock{font-family:"Baloo 2",cursive;font-weight:800;font-size:var(--s-2);line-height:.95;
+  letter-spacing:-.02em;color:var(--accent,#E08769);margin:0}
+.rule{width:44px;height:3px;border-radius:3px;background:var(--accent,#E08769);opacity:.5;margin:-.2rem 0 0}
+.line{font-size:var(--s-0);line-height:1.6;margin:0;max-width:33ch}
+.line + .line{margin-top:-.28rem}
+.line.soft{color:var(--ink-soft);font-size:var(--s--1);line-height:1.58;max-width:38ch}
+
+.headline{font-family:"Baloo 2",cursive;font-weight:700;font-size:var(--s-1);line-height:1.2;
+  letter-spacing:-.01em;margin:0;max-width:22ch}
+.stat{font-family:"Baloo 2",cursive;font-weight:800;font-size:var(--s-2);line-height:.95;
+  letter-spacing:-.02em;color:var(--accent,#E08769);margin:0}
+
+.foot{display:flex;justify-content:space-between;align-items:center;gap:1rem;
+  padding:0 clamp(1.3rem,4vw,2.5rem) clamp(.9rem,2.4vw,1.4rem) clamp(1.7rem,5vw,3rem);
+  font-family:"Baloo 2",cursive;font-weight:600;font-size:.7rem;letter-spacing:.05em;
+  color:var(--ink-soft);opacity:.75;position:relative;z-index:3}
+
+.split{display:grid;gap:.85rem}
+.split h3{font-family:"Baloo 2",cursive;font-weight:700;font-size:var(--s-0);margin:0 0 .18rem;color:var(--accent,#E08769)}
+.split p{margin:0;font-size:var(--s--1);line-height:1.55;color:var(--ink-soft);max-width:36ch}
+
+.labels{display:grid;gap:.45rem;margin:.05rem 0}
+.label{font-family:"Baloo 2",cursive;font-weight:700;font-size:var(--s-1);
+  padding:.3rem 0 .3rem .85rem;border-left:4px solid currentColor;border-radius:2px;margin:0}
+.label.no{color:var(--ink-soft);opacity:.45;text-decoration:line-through;text-decoration-thickness:2px}
+.label.yes{color:var(--accent,#E08769)}
+
+.steps{list-style:none;margin:.1rem 0 0;padding:0;counter-reset:s}
+.steps li{counter-increment:s;position:relative;padding-left:2.05rem;margin-bottom:.42rem;font-size:var(--s-0);line-height:1.42;max-width:30ch}
+.steps li::before{content:counter(s);position:absolute;left:0;top:.02em;font-family:"Baloo 2",cursive;font-weight:700;font-size:.8rem;
+  width:1.5rem;height:1.5rem;display:grid;place-items:center;border-radius:50%;
+  background:var(--accent,#E08769);color:#fff;opacity:.9}
+
+.leaf.cover .leaf-body{justify-content:center;gap:.55rem}
+.cover-title{font-family:"Baloo 2",cursive;font-weight:800;
+  font-size:clamp(2.7rem,1.7rem + 5vw,5.2rem);line-height:.9;letter-spacing:-.03em;margin:0;color:var(--accent,#E08769)}
+.cover-sub{font-size:var(--s-0);line-height:1.5;margin:0;max-width:27ch;color:var(--ink-soft)}
+.cover-by{font-family:"Baloo 2",cursive;font-weight:600;font-size:.74rem;letter-spacing:.03em;line-height:1.7;
+  color:var(--ink-soft);opacity:.8;margin:.3rem 0 0}
+
+.samplenote{display:inline-block;align-self:flex-start;margin:0 0 .2rem;
+  font-family:"Baloo 2",cursive;font-weight:700;font-size:.72rem;letter-spacing:.02em;
+  color:#8A5A20;background:#FBE6C4;border-radius:100px;padding:.3rem .8rem}
+.figrow{display:flex;gap:1rem;flex-wrap:nowrap;margin:.1rem 0 .2rem}
+.fig{min-width:0;flex:1 1 0}
+.fig b{display:block;font-family:"Baloo 2",cursive;font-weight:800;font-size:1.6rem;
+  line-height:1;color:var(--accent,#E08769)}
+.fig span{display:block;font-size:.7rem;line-height:1.25;color:var(--ink-soft);margin-top:.18rem}
+.pledge{list-style:none;margin:.2rem 0 0;padding:0;display:grid;gap:.5rem}
+.pledge li{position:relative;padding-left:1.9rem;font-size:var(--s-0);line-height:1.4;max-width:30ch}
+.pledge li::before{content:"\2713";position:absolute;left:0;top:-.04em;
+  font-family:"Baloo 2",cursive;font-weight:700;font-size:.78rem;
+  width:1.35rem;height:1.35rem;display:grid;place-items:center;border-radius:50%;
+  background:var(--accent,#E08769);color:#fff}
+.tryit{display:inline-block;align-self:flex-start;margin-top:.35rem;
+  font-family:"Baloo 2",cursive;font-weight:700;font-size:.92rem;text-decoration:none;color:#fff;
+  background:var(--accent,#E08769);border-radius:100px;padding:.5rem 1.15rem;
+  box-shadow:0 4px 0 rgba(75,58,85,.18);transition:transform .14s ease,filter .2s ease;position:relative;z-index:70}
+.tryit:hover{filter:brightness(.94);transform:translateY(-1px)}
+.tryit:active{transform:translateY(1px);box-shadow:0 2px 0 rgba(75,58,85,.18)}
+.tryit:focus-visible{outline:3px solid #4B3A55;outline-offset:3px}
+
+.sources{margin:0;padding:0;list-style:none;display:grid;gap:.5rem}
+.sources li{font-size:.73rem;line-height:1.45;color:var(--ink-soft);max-width:44ch;padding-left:.8rem;border-left:3px solid #E5D9EC;border-radius:2px}
+
+/* ---------------- controls ---------------- */
+.controls{display:flex;align-items:center;gap:.8rem;width:var(--leaf-w);max-width:100%}
+button.nav{font-family:"Baloo 2",cursive;font-weight:700;font-size:.8rem;color:#fff;background:#8B7BA8;
+  border:0;border-radius:100px;padding:.5rem 1.15rem;cursor:pointer;transition:transform 160ms ease,background 200ms ease,opacity 200ms ease;
+  box-shadow:0 4px 0 rgba(75,58,85,.18)}
+button.nav:hover:not(:disabled){background:#7A6996;transform:translateY(-1px)}
+button.nav:active:not(:disabled){transform:translateY(1px);box-shadow:0 2px 0 rgba(75,58,85,.18)}
+button.nav:disabled{opacity:.28;cursor:default;box-shadow:none}
+button.nav:focus-visible{outline:3px solid #E08769;outline-offset:2px}
+.progress{flex:1;display:flex;gap:3px;align-items:center}
+.tick{flex:1;height:4px;border-radius:4px;background:#4B3A55;opacity:.14;transition:opacity 350ms ease,background 350ms ease}
+.tick.seen{opacity:1;background:#B79FC4}
+.count{font-family:"Baloo 2",cursive;font-weight:700;font-size:.74rem;color:var(--ink-soft);min-width:3.1rem;text-align:right}
+.hint{font-family:"Baloo 2",cursive;font-weight:600;font-size:.72rem;color:var(--ink-soft);opacity:.6;text-align:center;transition:opacity 400ms ease;margin:0}
+.hint.gone{opacity:0}
+.zone{position:absolute;top:0;bottom:0;width:50%;background:transparent;border:0;cursor:pointer;z-index:60;pointer-events:none}
+.zone.prev{left:0}.zone.next{right:0}
+.zone:focus-visible{outline:3px solid #E08769;outline-offset:-5px;border-radius:8px}
+
+
+
+/* last-resort compaction, switched on per page by the fit pass */
+.leaf-body.tight{gap:.45rem}
+.leaf-body.tight .headline{font-size:1.06rem;line-height:1.18}
+.leaf-body.tight .line{font-size:.85rem;line-height:1.45}
+.leaf-body.tight .line.soft{font-size:.76rem;line-height:1.4}
+.leaf-body.tight .steps li{font-size:.85rem;line-height:1.35;margin-bottom:.3rem}
+.leaf-body.tight .sources li{font-size:.63rem;line-height:1.3}
+.leaf-body.tight .sources{gap:.34rem}
+.leaf-body.tight .fig b{font-size:1.18rem}
+.leaf-body.tight .fig span{font-size:.6rem}
+.leaf-body.tight .labels{gap:.3rem}
+.leaf-body.tight .label{font-size:1.02rem;padding:.24rem 0 .24rem .8rem}
+.leaf-body.tight .split{gap:.55rem}
+.leaf-body.tight .clock,.leaf-body.tight .stat{font-size:1.9rem}
+.leaf-body.tight .cover-title{font-size:2.2rem}
+
+@media (max-width:520px){
+  :root{--leaf-h:min(78vh,760px); --leaf-h:min(78dvh,760px)}
+  .art{height:44%}
+  .leaf.cover .art{height:50%}
+  .controls{gap:.45rem}
+  button.nav{padding:.44rem .85rem;font-size:.74rem}
+  .count{min-width:2.7rem}
+}
+
+/* the picture yields space to the text on shorter screens */
+@media (max-height:920px){
+  .art{height:42%} .leaf.cover .art{height:50%}
+}
+@media (max-height:800px){
+  .art{height:42%} .leaf.cover .art{height:50%}
+  .figrow{gap:.75rem}
+  .fig{min-width:0;flex:1 1 0}
+  .fig b{font-size:1.5rem}
+  .fig span{font-size:.67rem;line-height:1.25}
+}
+@media (max-height:700px){
+  :root{
+    --s--1:clamp(.74rem,.72rem+.15vw,.82rem);
+    --s-0: clamp(.9rem,.87rem+.22vw,1rem);
+    --s-1: clamp(1.1rem,.96rem+.6vw,1.38rem);
+    --s-2: clamp(1.9rem,1.3rem+2.6vw,3rem);
+  }
+  .art{height:34%} .leaf.cover .art{height:42%}
+  .leaf-body{gap:.62rem}
+  .fig b{font-size:1.35rem}
+  .fig span{font-size:.64rem}
+}
+@media (max-height:600px){
+  :root{--s--1:.73rem; --s-0:.86rem; --s-1:1.02rem; --s-2:1.7rem}
+  .art{height:24%} .leaf.cover .art{height:32%}
+  .leaf-body{gap:.44rem}
+  .foot{padding-bottom:.55rem}
+  .steps li{margin-bottom:.4rem}
+  .sources li{font-size:.68rem}
+}
+@media (prefers-reduced-motion:reduce){.leaf,body{transition:none}}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+</style>
+</head>
+<body>
+
+<div class="book" id="book" aria-label="Picture book. Use arrow keys or the buttons to turn pages.">
+
+<!-- ══════ 0 · COVER ══════ -->
+<article class="leaf cover" style="--panel:#F6EFF8;--accent:#B98BC4" data-amb="#DED2EC">
+  <div class="art">
+  <svg viewBox="0 0 200 130" preserveAspectRatio="xMidYMid meet" role="img" aria-label="A girl sits up in bed at night with her blanket around her, her face lit by the phone she is holding">
+    <rect x="-20" y="-20" width="240" height="170" fill="#9E9AD1"/>
+    <rect x="-20" y="96" width="240" height="60" fill="#8A83BF"/>
+    <ellipse cx="100" cy="100" rx="86" ry="9" fill="#7E77B4" opacity=".5"/>
+    <rect x="120" y="8" width="62" height="56" rx="5" fill="#6E6BA8"/>
+    <circle class="moon" cx="166" cy="26" r="8"/>
+    <circle cx="134" cy="20" r="1.6" fill="#FCF1D6"/><circle cx="146" cy="38" r="1.2" fill="#FCF1D6"/>
+    <circle cx="128" cy="46" r="1.4" fill="#FCF1D6"/><circle cx="172" cy="50" r="1.2" fill="#FCF1D6"/>
+    <rect x="120" y="8" width="62" height="56" rx="5" fill="none" stroke="#EFE0EC" stroke-width="4"/>
+    <path d="M151 10v52" stroke="#EFE0EC" stroke-width="3.5"/><path d="M122 36h58" stroke="#EFE0EC" stroke-width="3.5"/>
+    <path d="M112 4c8 16 6 40 0 62h12c-6-22-6-46 0-62z" fill="#D9AEC9"/>
+    <path d="M188 4c-8 16-6 40 0 62h-12c6-22 6-46 0-62z" fill="#D9AEC9"/>
+    <rect x="164" y="80" width="18" height="20" rx="3" class="pot"/>
+    <path class="plant" d="M173 80c-8-4-12-12-10-20 8 2 12 10 10 20zM173 80c8-6 10-16 6-24-7 4-9 15-6 24z"/>
+    <rect x="4" y="40" width="16" height="62" rx="6" class="wood"/>
+    <rect x="8" y="46" width="8" height="34" rx="4" class="wood-lo" opacity=".5"/>
+    <path class="sheet" d="M14 72h150a6 6 0 0 1 6 6v20a6 6 0 0 1-6 6H14z"/>
+    <path class="quilt" d="M52 78h112a6 6 0 0 1 6 6v14a6 6 0 0 1-6 6H52z"/>
+    <path class="quilt" d="M52 78c14-14 34-16 50-8 14 7 26 5 38 8z"/>
+    <circle cx="78" cy="88" r="2.4" fill="#F8D2D8"/><circle cx="100" cy="94" r="2.4" fill="#F8D2D8"/>
+    <circle cx="122" cy="86" r="2.4" fill="#F8D2D8"/><circle cx="144" cy="94" r="2.4" fill="#F8D2D8"/>
+    <ellipse cx="34" cy="74" rx="22" ry="9" fill="#FDF6F0"/>
+    <path class="hair" d="M44 46c-14-6-28 2-30 16-3 12-2 24 1 32h44c4-16 4-40-3-48a12 12 0 0 0-12 0z"/>
+    <circle class="skin" cx="36" cy="48" r="16"/>
+    <path class="hair" d="M20 44c2-12 22-16 32-6-10-3-24-1-32 6z"/>
+    <path class="hair-lo" d="M50 52c5 10 5 30 2 42h8c2-14 1-34-3-44z"/>
+    <ellipse class="eye" cx="31" cy="52" rx="2" ry="2.6"/>
+    <ellipse class="eye" cx="42" cy="52" rx="2" ry="2.6"/>
+    <circle class="blush" cx="26" cy="57" r="3.4"/><circle class="blush" cx="47" cy="57" r="3.4"/>
+    <path d="M34 58c1.6 1.4 3.4 1.4 5 0" stroke="#3E3047" stroke-width="1.6" fill="none" stroke-linecap="round" opacity=".65"/>
+    <path class="skin" d="M22 78c-3-6 0-11 5-11 4 0 6 3 7 7zM50 78c3-6 1-11-4-11-4 0-7 3-8 7z"/>
+    <rect class="screen" x="30" y="66" width="15" height="22" rx="3"/>
+    <ellipse class="glow" cx="37" cy="72" rx="26" ry="20"/>
+    <ellipse cx="76" cy="66" rx="9" ry="8" fill="#F5D9A8"/>
+    <circle cx="72" cy="63" r="1.2" fill="#4E3B54"/><circle cx="80" cy="63" r="1.2" fill="#4E3B54"/>
+    <path d="M69 58c-2-4 1-6 3-4M83 58c2-4-1-6-3-4" stroke="#F5D9A8" stroke-width="4" stroke-linecap="round"/>
+  </svg>
+  </div>
+  <div class="leaf-body">
+    <h1 class="cover-title">Gising Pa?</h1>
+    <p class="cover-sub">Still awake? A little book about the sleep we mean to get, and the sleep we actually get.</p>
+    <p class="cover-by">Gelrose Conda<br>Understanding the Self · Mapúa Malayan Digital College</p>
+  </div>
+  <div class="foot"><span>Turn the page →</span><span>2026</span></div>
+</article>
+
+<!-- ══════ 1 · 12:30 ══════ -->
+<article class="leaf" style="--panel:#F7F0F6;--accent:#B98BC4" data-amb="#DDD3EA">
+  <div class="art">
+  <svg viewBox="0 0 200 130" preserveAspectRatio="xMidYMid meet" role="img" aria-label="She takes off her headset at the end of a long night shift, her desk lit by a small lamp">
+    <rect x="-20" y="-20" width="240" height="170" fill="#A8A2D4"/>
+    <rect x="-20" y="98" width="240" height="60" fill="#8F88C0"/>
+    <rect x="8" y="10" width="46" height="44" rx="5" fill="#7C77B4"/>
+    <circle class="moon" cx="32" cy="26" r="7"/>
+    <circle cx="20" cy="42" r="1.3" fill="#FCF1D6"/><circle cx="46" cy="18" r="1.1" fill="#FCF1D6"/>
+    <rect x="8" y="10" width="46" height="44" rx="5" fill="none" stroke="#EFE0EC" stroke-width="4"/>
+    <path d="M31 12v40M10 32h42" stroke="#EFE0EC" stroke-width="3"/>
+    <rect x="-10" y="94" width="220" height="8" rx="3" class="wood"/>
+    <rect x="-10" y="102" width="220" height="4" class="wood-lo" opacity=".6"/>
+    <rect x="126" y="46" width="62" height="42" rx="5" fill="#5F5A8C"/>
+    <rect x="130" y="50" width="54" height="34" rx="3" fill="#8FA9C9" opacity=".55"/>
+    <rect x="152" y="88" width="10" height="7" fill="#4F4A78"/>
+    <rect x="142" y="94" width="30" height="4" rx="2" fill="#4F4A78"/>
+    <rect x="104" y="76" width="12" height="18" rx="2" class="pot"/>
+    <path class="plant" d="M110 76c-6-3-9-9-8-15 6 2 9 8 8 15zM110 76c6-4 8-12 5-18-5 3-7 11-5 18z"/>
+    <path d="M14 94c0-6 5-10 11-10s11 4 11 10z" fill="#F0D8B6"/>
+    <path d="M20 84h10v-6h-10z" fill="#E5C79E"/>
+    <path class="hair" d="M74 40c-16-4-28 6-27 22 0 12-2 24-5 32h58c2-18 2-42-6-50a16 16 0 0 0-20-4z"/>
+    <circle class="skin" cx="76" cy="46" r="16"/>
+    <path class="hair" d="M60 42c2-12 22-16 32-6-10-3-24-1-32 6z"/>
+    <ellipse class="eye" cx="71" cy="49" rx="2" ry="2.4"/>
+    <ellipse class="eye" cx="82" cy="49" rx="2" ry="2.4"/>
+    <circle class="blush" cx="66" cy="55" r="3.4"/><circle class="blush" cx="87" cy="55" r="3.4"/>
+    <path d="M74 56c1.6 1.2 3.4 1.2 5 0" stroke="#3E3047" stroke-width="1.6" fill="none" stroke-linecap="round" opacity=".6"/>
+    <path d="M60 34a17 12 0 0 1 34 0" fill="none" stroke="#6E88B8" stroke-width="4" stroke-linecap="round"/>
+    <rect x="55" y="32" width="8" height="12" rx="4" fill="#6E88B8"/>
+    <rect x="91" y="32" width="8" height="12" rx="4" fill="#6E88B8"/>
+    <path d="M60 94c0-16 7-26 17-26s17 10 17 26z" fill="#9DC0C5"/>
+    <path class="skin" d="M92 74c8-2 12-8 12-16l7 3c-1 12-8 20-18 21z"/>
+    <path class="skin" d="M60 76c-6 2-9 8-9 16l-7-1c0-12 6-19 15-21z"/>
+  </svg>
+  </div>
+  <div class="leaf-body">
+    <p class="clock">12:30</p>
+    <div class="rule"></div>
+    <p class="line">My shift ends.</p>
+    <p class="line">I tell myself I will sleep right away. I mean it, every single time.</p>
+  </div>
+  <div class="foot"><span>The night</span><span class="pnum"></span></div>
+</article>
+
+<!-- ══════ 2 · 12:47 ══════ -->
+<article class="leaf" style="--panel:#F5EFF7;--accent:#8FA9D4" data-amb="#D6D0EA">
+  <div class="art">
+  <svg viewBox="0 0 200 130" preserveAspectRatio="xMidYMid meet" role="img" aria-label="She sits on the edge of the bed in her pyjamas when a message lights up her phone">
+    <rect x="-20" y="-20" width="240" height="170" fill="#9E9AD1"/>
+    <rect x="-20" y="102" width="240" height="60" fill="#8A83BF"/>
+    <circle cx="24" cy="18" r="1.5" fill="#FCF1D6"/><circle cx="44" cy="34" r="1.1" fill="#FCF1D6"/><circle cx="14" cy="44" r="1.2" fill="#FCF1D6"/>
+    <rect x="4" y="52" width="16" height="52" rx="6" class="wood"/>
+    <path class="sheet" d="M12 76h108a6 6 0 0 1 6 6v18a6 6 0 0 1-6 6H12z"/>
+    <path class="quilt" d="M78 80h42a6 6 0 0 1 6 6v14a6 6 0 0 1-6 6H78z"/>
+    <circle cx="96" cy="90" r="2.2" fill="#F8D2D8"/><circle cx="112" cy="96" r="2.2" fill="#F8D2D8"/>
+    <ellipse cx="46" cy="124" rx="12" ry="4" fill="#E7B9C4"/>
+    <ellipse cx="66" cy="124" rx="12" ry="4" fill="#E7B9C4"/>
+    <path class="hair" d="M52 24c-16-2-27 8-26 24 0 16-3 34-6 44h58c3-22 3-52-6-60a16 16 0 0 0-20-8z"/>
+    <circle class="skin" cx="56" cy="32" r="16"/>
+    <path class="hair" d="M40 28c2-12 22-16 32-6-10-3-24-1-32 6z"/>
+    <ellipse class="eye" cx="52" cy="35" rx="2" ry="2.5"/>
+    <ellipse class="eye" cx="63" cy="35" rx="2" ry="2.5"/>
+    <circle class="blush" cx="47" cy="41" r="3.4"/><circle class="blush" cx="68" cy="41" r="3.4"/>
+    <ellipse cx="58" cy="43" rx="2" ry="1.4" fill="#3E3047" opacity=".55"/>
+    <path d="M40 92c0-22 8-34 20-34s20 12 20 34z" fill="#C6B0DE"/>
+    <path d="M52 92h16v20H52z" fill="#A996C9"/>
+    <path class="skin" d="M76 68c8 4 12 10 13 18l-9 3c-1-7-4-11-9-13z"/>
+    <path class="skin" d="M44 70c-6 4-9 10-9 18l9 2c0-7 2-12 6-14z"/>
+    <rect class="screen" x="60" y="82" width="20" height="13" rx="3" transform="rotate(-8 70 88)"/>
+    <ellipse class="glow" cx="70" cy="86" rx="26" ry="18"/>
+    <g>
+      <rect x="120" y="18" width="60" height="34" rx="14" fill="#EAF4FC"/>
+      <path d="M136 52l-4 10 14-10z" fill="#EAF4FC"/>
+      <circle cx="137" cy="35" r="3.4" fill="#8FA9D4"/>
+      <circle cx="150" cy="35" r="3.4" fill="#8FA9D4"/>
+      <circle cx="163" cy="35" r="3.4" fill="#8FA9D4"/>
+    </g>
+    <rect x="168" y="84" width="18" height="20" rx="3" class="pot"/>
+    <path class="plant" d="M177 84c-8-4-12-12-10-20 8 2 12 10 10 20zM177 84c8-6 10-16 6-24-7 4-9 15-6 24z"/>
+  </svg>
+  </div>
+  <div class="leaf-body">
+    <p class="clock">12:47</p>
+    <div class="rule"></div>
+    <p class="line">A friend messages me.</p>
+    <p class="line">Replying takes ten seconds. Not replying feels like something worse than rude.</p>
+  </div>
+  <div class="foot"><span>The night</span><span class="pnum"></span></div>
+</article>
+
+<!-- ══════ 3 · 1:15 ══════ -->
+<article class="leaf" style="--panel:#F2EEF8;--accent:#8FA9D4" data-amb="#D2CCE9">
+  <div class="art">
+  <svg viewBox="0 0 200 130" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Close up of her face in the dark, lit from below by the phone, with messages floating all around her">
+    <rect x="-20" y="-20" width="240" height="170" fill="#8C86BE"/>
+    <ellipse class="glow" cx="100" cy="122" rx="80" ry="62"/>
+    <path class="hair" d="M100 14c-30 0-48 22-45 52 2 20-4 42-12 58h114c-8-16-14-38-12-58 3-30-15-52-45-52z"/>
+    <circle class="skin" cx="100" cy="62" r="32"/>
+    <path class="hair" d="M68 54c4-24 40-32 62-14-18-6-46-2-62 14z"/>
+    <path class="hair-lo" d="M132 56c6 16 6 44 2 60h14c2-20-2-48-8-60z"/>
+    <ellipse class="eye" cx="88" cy="62" rx="3.4" ry="4.4"/>
+    <ellipse class="eye" cx="112" cy="62" rx="3.4" ry="4.4"/>
+    <circle cx="89.4" cy="60.4" r="1.2" fill="#fff" opacity=".85"/>
+    <circle cx="113.4" cy="60.4" r="1.2" fill="#fff" opacity=".85"/>
+    <circle class="blush" cx="80" cy="72" r="6"/><circle class="blush" cx="120" cy="72" r="6"/>
+    <path d="M95 76c3 2.6 7 2.6 10 0" stroke="#3E3047" stroke-width="2.2" fill="none" stroke-linecap="round" opacity=".6"/>
+    <path d="M83 51c3-3 8-3 11 0M106 51c3-3 8-3 11 0" stroke="#4E3B54" stroke-width="2.4" fill="none" stroke-linecap="round" opacity=".5"/>
+    <rect class="screen" x="82" y="112" width="36" height="24" rx="4"/>
+    <rect x="6" y="22" width="42" height="20" rx="9" fill="#EAF4FC" opacity=".9"/>
+    <rect x="152" y="12" width="46" height="20" rx="9" fill="#EAF4FC" opacity=".72"/>
+    <rect x="162" y="50" width="34" height="17" rx="8" fill="#EAF4FC" opacity=".5"/>
+    <rect x="2" y="58" width="32" height="17" rx="8" fill="#EAF4FC" opacity=".38"/>
+    <rect x="30" y="2" width="26" height="14" rx="7" fill="#EAF4FC" opacity=".26"/>
+  </svg>
+  </div>
+  <div class="leaf-body">
+    <p class="clock">1:15</p>
+    <div class="rule"></div>
+    <p class="line">Five more minutes.</p>
+    <p class="line">I have said this to myself so many times that it no longer counts as a plan.</p>
+  </div>
+  <div class="foot"><span>The night</span><span class="pnum"></span></div>
+</article>
+
+<!-- ══════ 4 · 2:04 ══════ -->
+<article class="leaf" style="--panel:#F1EDF7;--accent:#8B7BA8" data-amb="#CFC9E6">
+  <div class="art">
+  <svg viewBox="0 0 200 130" preserveAspectRatio="xMidYMid meet" role="img" aria-label="She lies in bed with the blanket up to her chin and her eyes still wide open, the phone face down beside her">
+    <rect x="-20" y="-20" width="240" height="170" fill="#8A84BD"/>
+    <rect x="-20" y="88" width="240" height="70" fill="#F7EAE6"/>
+    <circle cx="164" cy="20" r="9" class="moon" opacity=".8"/>
+    <circle cx="140" cy="14" r="1.4" fill="#FCF1D6"/><circle cx="182" cy="38" r="1.2" fill="#FCF1D6"/><circle cx="24" cy="20" r="1.3" fill="#FCF1D6"/>
+    <circle cx="40" cy="34" r="17" fill="none" stroke="#EFE0EC" stroke-width="3.5" opacity=".8"/>
+    <path d="M40 34V24M40 34l7 6" stroke="#EFE0EC" stroke-width="3" stroke-linecap="round" opacity=".8"/>
+    <ellipse cx="46" cy="86" rx="30" ry="12" fill="#FDF6F0"/>
+    <path class="hair" d="M40 62c-18 0-30 10-30 22 0 4 1 8 3 10h62c2-6 2-14-2-20-6-9-18-12-33-12z"/>
+    <circle class="skin" cx="48" cy="76" r="16"/>
+    <path class="hair" d="M32 72c2-12 22-16 32-6-10-3-24-1-32 6z"/>
+    <ellipse class="eye" cx="44" cy="78" rx="2.4" ry="3"/>
+    <ellipse class="eye" cx="56" cy="78" rx="2.4" ry="3"/>
+    <circle cx="44.8" cy="76.8" r="1" fill="#fff" opacity=".8"/>
+    <circle cx="56.8" cy="76.8" r="1" fill="#fff" opacity=".8"/>
+    <circle class="blush" cx="39" cy="84" r="3.4"/><circle class="blush" cx="61" cy="84" r="3.4"/>
+    <path d="M47 86h6" stroke="#3E3047" stroke-width="1.8" stroke-linecap="round" opacity=".5"/>
+    <path class="quilt" d="M64 92c16-14 44-16 68-8 16 6 32 4 48 8z"/>
+    <path class="quilt" d="M64 92h116v22H64z"/>
+    <path class="quilt-lo" d="M64 96c22-8 50-9 72-3 16 4 30 3 44 5v-3c-16-4-32-2-48-8-24-8-52-6-68 8z" opacity=".5"/>
+    <circle cx="92" cy="102" r="2.4" fill="#F8D2D8"/><circle cx="116" cy="108" r="2.4" fill="#F8D2D8"/>
+    <circle cx="140" cy="100" r="2.4" fill="#F8D2D8"/><circle cx="164" cy="108" r="2.4" fill="#F8D2D8"/>
+    <g transform="rotate(-7 150 84)">
+      <rect x="132" y="76" width="34" height="15" rx="4" fill="#6E6BA8"/>
+      <rect x="136" y="79" width="26" height="9" rx="3" fill="#5C5993"/>
+    </g>
+    <path d="M130 92h42" stroke="#EAF4FC" stroke-width="3" stroke-linecap="round" opacity=".85"/>
+  </svg>
+  </div>
+  <div class="leaf-body">
+    <p class="clock">2:04</p>
+    <div class="rule"></div>
+    <p class="line">I put the phone down.</p>
+    <p class="line">Nothing made me stay awake. No deadline, no emergency, no one waiting. Nothing except me.</p>
+  </div>
+  <div class="foot"><span>The night</span><span class="pnum"></span></div>
+</article>
+
+<!-- ══════ 5 · 6:00 ══════ -->
+<article class="leaf" style="--panel:#FBF1EC;--accent:#E08769" data-amb="#EAD6CB">
+  <div class="art">
+  <svg viewBox="0 0 200 130" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Morning. She sits up with messy hair and one eye barely open while the alarm clock rings">
+    <rect x="-20" y="-20" width="240" height="170" fill="#C9BBD8"/>
+    <rect x="128" y="6" width="60" height="56" rx="5" fill="#F6D9B4"/>
+    <circle cx="158" cy="34" r="12" fill="#FBE7BE"/>
+    <rect x="128" y="6" width="60" height="56" rx="5" fill="none" stroke="#FBF3EA" stroke-width="4"/>
+    <path d="M158 8v52M130 34h56" stroke="#FBF3EA" stroke-width="3.5"/>
+    <path d="M128 62L92 116h96V62z" fill="#F8E2C4" opacity=".55"/>
+    <rect x="-20" y="98" width="240" height="60" fill="#B9A8CB"/>
+    <path class="sheet" d="M16 92h130a6 6 0 0 1 6 6v14a6 6 0 0 1-6 6H16z"/>
+    <path class="quilt" d="M74 96h72a6 6 0 0 1 6 6v10a6 6 0 0 1-6 6H74z"/>
+    <path class="hair" d="M56 26c-18 0-30 12-28 30 1 14-2 28-5 38h64c3-18 4-42-4-54a20 20 0 0 0-27-14z"/>
+    <path class="hair" d="M34 30l-9-10M52 20l-2-13M76 28l10-11M86 44l13-6M24 46l-13-5" stroke="#4E3B54" stroke-width="4" stroke-linecap="round" fill="none"/>
+    <circle class="skin" cx="58" cy="42" r="17"/>
+    <path class="hair" d="M41 38c2-13 23-17 34-6-11-3-25-1-34 6z"/>
+    <path d="M48 44c3-2.6 7-2.6 10 0" stroke="#3E3047" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+    <ellipse class="eye" cx="66" cy="45" rx="2" ry="2.4"/>
+    <circle class="blush" cx="46" cy="51" r="4"/><circle class="blush" cx="70" cy="51" r="4"/>
+    <ellipse cx="59" cy="53" rx="3" ry="2" fill="#3E3047" opacity=".5"/>
+    <path d="M40 96c0-24 8-38 20-38s20 14 20 38z" fill="#9DC0C5"/>
+    <path class="skin" d="M78 72c8 6 10 14 9 24l-9-1c1-8-1-14-6-17z"/>
+    <circle cx="120" cy="84" r="14" fill="#F2B8A0"/>
+    <circle cx="120" cy="84" r="10" fill="#FBF3EA"/>
+    <path d="M110 72a6 6 0 0 1 2-9M130 72a6 6 0 0 0-2-9" stroke="#F2B8A0" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M112 96l-4 6M128 96l4 6" stroke="#F2B8A0" stroke-width="4" stroke-linecap="round"/>
+    <path d="M120 84v-6M120 84h5" stroke="#4E3B54" stroke-width="2" stroke-linecap="round"/>
+    <path d="M100 74c-4 4-5 9-4 14M140 74c4 4 5 9 4 14" stroke="#E08769" stroke-width="2.6" fill="none" stroke-linecap="round" opacity=".7"/>
+  </svg>
+  </div>
+  <div class="leaf-body">
+    <p class="clock">6:00</p>
+    <div class="rule"></div>
+    <p class="line">The alarm.</p>
+    <p class="line">Four hours. About half of what an adult needs.</p>
+    <p class="line soft">Today I will be slow, and short with the people I love. Tonight I will do it again.</p>
+  </div>
+  <div class="foot"><span>The night</span><span class="pnum"></span></div>
+</article>
+
+<!-- ══════ 6 · THE SCALE ══════ -->
+<article class="leaf" style="--panel:#FBF3EC;--accent:#E08769" data-amb="#EBDACD">
+  <div class="art">
+  <svg viewBox="0 0 200 130" preserveAspectRatio="xMidYMid meet" role="img" aria-label="One hundred little people. Fifty-six of them are awake, and one of those is her.">
+    <rect x="-20" y="-20" width="240" height="170" fill="#F6E7DA"/>
+    <g id="dotgrid"></g>
+  </svg>
+  </div>
+  <div class="leaf-body">
+    <p class="stat">56%</p>
+    <p class="line">of Filipinos sleep less than seven hours a night — the highest share in Asia.</p>
+    <p class="line soft">Milieu Insight, 2023</p>
+    <p class="line">I am not unusual. That is the part that worries me.</p>
+  </div>
+  <div class="foot"><span>The scale</span><span class="pnum"></span></div>
+</article>
+
+<!-- ══════ 7 · WHY THE PHONE ══════ -->
+<article class="leaf" style="--panel:#F3F0F9;--accent:#8FA9D4" data-amb="#D5CFEB">
+  <div class="art">
+  <svg viewBox="0 0 200 130" preserveAspectRatio="xMidYMid meet" role="img" aria-label="On one side, screen light shining into her eyes while a sleepy moon drifts away. On the other, messages linked together like a chain.">
+    <rect x="-20" y="-20" width="130" height="170" fill="#9C97CE"/>
+    <rect x="100" y="-20" width="140" height="170" fill="#8E88C2"/>
+    <path class="hair" d="M42 26c-18 0-28 12-26 28 1 14-2 30-6 40h56c3-18 4-42-4-54a20 20 0 0 0-20-14z"/>
+    <circle class="skin" cx="46" cy="46" r="18"/>
+    <path class="hair" d="M28 42c2-14 24-18 36-6-12-3-27-1-36 6z"/>
+    <ellipse class="eye" cx="52" cy="48" rx="2.6" ry="3.4"/>
+    <ellipse class="eye" cx="40" cy="48" rx="2.6" ry="3.4"/>
+    <circle class="blush" cx="34" cy="55" r="4"/><circle class="blush" cx="58" cy="55" r="4"/>
+    <path d="M43 58c2 1.8 5 1.8 7 0" stroke="#3E3047" stroke-width="1.8" fill="none" stroke-linecap="round" opacity=".6"/>
+    <rect class="screen" x="80" y="38" width="16" height="26" rx="3"/>
+    <path d="M76 42l-8 3M76 51h-9M76 60l-8 3" stroke="#EAF4FC" stroke-width="2.6" stroke-linecap="round" opacity=".9"/>
+    <path class="moon" d="M22 12a9 9 0 1 0 10 13 11 11 0 0 1-10-13z" opacity=".55"/>
+    <path d="M14 26c-3 3-3 6-1 8" stroke="#FCF1D6" stroke-width="2" fill="none" stroke-linecap="round" opacity=".4"/>
+    <rect x="118" y="16" width="46" height="21" rx="9" fill="#EAF4FC" opacity=".92"/>
+    <rect x="146" y="48" width="50" height="21" rx="9" fill="#EAF4FC" opacity=".78"/>
+    <rect x="122" y="80" width="46" height="21" rx="9" fill="#EAF4FC" opacity=".64"/>
+    <path d="M154 37c-3 4-1 8 3 10M160 69c-4 5-10 6-15 11" stroke="#EAF4FC" stroke-width="2.6" fill="none" stroke-linecap="round" opacity=".7"/>
+    <circle cx="132" cy="26" r="3" fill="#8FA9D4"/><circle cx="141" cy="26" r="3" fill="#8FA9D4"/><circle cx="150" cy="26" r="3" fill="#8FA9D4"/>
+    <path d="M160 58l4 4 8-9" stroke="#8FA9D4" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M139 91c3-4 9-4 12 0" stroke="#8FA9D4" stroke-width="3" fill="none" stroke-linecap="round"/>
+  </svg>
+  </div>
+  <div class="leaf-body">
+    <h2 class="headline">Why the phone, and not just a late night?</h2>
+    <div class="split">
+      <div>
+        <h3>The light</h3>
+        <p>Screens delay the body clock and hold back melatonin, the hormone that makes us sleepy. We take longer to drop off and wake up less alert. (Chang et al., 2015)</p>
+      </div>
+      <div>
+        <h3>The pull</h3>
+        <p>One reply. One video. One more. Night mode dims the screen. It does nothing about the conversation.</p>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>The cause</span><span class="pnum"></span></div>
+</article>
+
+<!-- ══════ 8 · THE NAME ══════ -->
+<article class="leaf" style="--panel:#F6F0F7;--accent:#B98BC4" data-amb="#DBD1EA">
+  <div class="art">
+  <svg viewBox="0 0 200 130" preserveAspectRatio="xMidYMid meet" role="img" aria-label="She walks towards her bed while a ribbon of messages gently tugs her back by the wrist">
+    <rect x="-20" y="-20" width="240" height="170" fill="#A29CD0"/>
+    <rect x="-20" y="104" width="240" height="60" fill="#8D86BF"/>
+    <rect x="176" y="46" width="14" height="58" rx="5" class="wood"/>
+    <path class="sheet" d="M126 76h58a5 5 0 0 1 5 5v18a5 5 0 0 1-5 5h-58z"/>
+    <path class="quilt" d="M126 80h54a5 5 0 0 1 5 5v14a5 5 0 0 1-5 5h-54z"/>
+    <ellipse cx="146" cy="78" rx="16" ry="6" fill="#FDF6F0"/>
+    <path class="hair" d="M86 22c-16 0-26 12-25 28 1 16-2 34-5 44h56c3-20 4-46-4-58a18 18 0 0 0-22-14z"/>
+    <circle class="skin" cx="88" cy="38" r="16"/>
+    <path class="hair" d="M72 34c2-12 22-16 32-6-10-3-24-1-32 6z"/>
+    <ellipse class="eye" cx="92" cy="41" rx="2" ry="2.5"/>
+    <ellipse class="eye" cx="82" cy="41" rx="2" ry="2.5"/>
+    <circle class="blush" cx="77" cy="47" r="3.6"/><circle class="blush" cx="97" cy="47" r="3.6"/>
+    <path d="M85 49c1.6 1.4 3.4 1.4 5 0" stroke="#3E3047" stroke-width="1.6" fill="none" stroke-linecap="round" opacity=".6"/>
+    <path d="M70 100c0-26 8-40 20-40s20 14 20 40z" fill="#C6B0DE"/>
+    <path class="skin" d="M78 100l-6 18 9 2 8-19zM102 100l8 18 9-3-8-17z"/>
+    <path class="skin" d="M72 68c-12 4-22 12-28 22l8 6c7-9 16-16 24-19z"/>
+    <path d="M46 92C34 88 26 78 22 64" stroke="#EAF4FC" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="1 7"/>
+    <rect x="4" y="42" width="34" height="20" rx="9" fill="#EAF4FC"/>
+    <circle cx="13" cy="52" r="2.6" fill="#8FA9D4"/><circle cx="21" cy="52" r="2.6" fill="#8FA9D4"/><circle cx="29" cy="52" r="2.6" fill="#8FA9D4"/>
+    <circle cx="40" cy="74" r="4" fill="#EAF4FC" opacity=".8"/>
+    <circle cx="32" cy="84" r="3" fill="#EAF4FC" opacity=".6"/>
+  </svg>
+  </div>
+  <div class="leaf-body">
+    <h2 class="headline">There is a name for this.</h2>
+    <p class="line"><em>Bedtime procrastination:</em> going to bed later than we meant to, with nothing outside of us forcing it.</p>
+    <div class="rule"></div>
+    <p class="line">Naming it helped me. It made the problem a habit instead of a character.</p>
+  </div>
+  <div class="foot"><span>The name</span><span class="pnum"></span></div>
+</article>
+
+<!-- ══════ 9 · THE GAP ══════ -->
+<article class="leaf" style="--panel:#F4F1F8;--accent:#8B7BA8" data-amb="#D6D0EA">
+  <div class="art">
+  <svg viewBox="0 0 200 130" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Two versions of the same girl side by side: one fast asleep and smiling, one sitting up in the dark with a phone">
+    <rect x="-20" y="-20" width="130" height="170" fill="#B9C9DE"/>
+    <rect x="100" y="-20" width="140" height="170" fill="#8B85BD"/>
+    <ellipse cx="46" cy="86" rx="26" ry="10" fill="#FDF6F0"/>
+    <path class="hair" d="M40 66c-16 0-26 8-26 18 0 3 1 6 2 8h56c2-5 2-12-2-17-5-7-16-9-30-9z"/>
+    <circle class="skin" cx="46" cy="78" r="14"/>
+    <path class="hair" d="M32 74c2-10 20-14 29-5-9-2-22-1-29 5z"/>
+    <path d="M39 78c2-2.4 5-2.4 7 0M50 78c2-2.4 5-2.4 7 0" stroke="#3E3047" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+    <circle class="blush" cx="37" cy="84" r="3.4"/><circle class="blush" cx="57" cy="84" r="3.4"/>
+    <path d="M44 86c1.6 1.6 3.4 1.6 5 0" stroke="#3E3047" stroke-width="1.6" fill="none" stroke-linecap="round" opacity=".65"/>
+    <path class="quilt" d="M60 92c14-10 34-11 52-4v24H60z" opacity=".85"/>
+    <text class="zzz" x="68" y="58">z</text><text class="zzz" x="76" y="46" font-size="14">z</text><text class="zzz" x="88" y="32" font-size="17">z</text>
+    <text class="tag" x="46" y="120" text-anchor="middle">ideal self</text>
+    <path class="hair" d="M152 30c-16 0-26 12-25 28 1 16-2 32-5 42h56c3-20 4-44-4-56a18 18 0 0 0-22-14z"/>
+    <circle class="skin" cx="154" cy="46" r="16"/>
+    <path class="hair" d="M138 42c2-12 22-16 32-6-10-3-24-1-32 6z"/>
+    <ellipse class="eye" cx="149" cy="49" rx="2.2" ry="2.8"/>
+    <ellipse class="eye" cx="160" cy="49" rx="2.2" ry="2.8"/>
+    <circle class="blush" cx="143" cy="55" r="3.6"/><circle class="blush" cx="166" cy="55" r="3.6"/>
+    <path d="M151 58h7" stroke="#3E3047" stroke-width="1.8" stroke-linecap="round" opacity=".5"/>
+    <path d="M136 100c0-24 8-38 19-38s19 14 19 38z" fill="#A996C9"/>
+    <path class="skin" d="M170 78c8 4 12 10 13 18l-9 2c-1-7-4-11-9-13z"/>
+    <rect class="screen" x="168" y="88" width="18" height="12" rx="3" transform="rotate(-8 177 94)"/>
+    <ellipse class="glow" cx="177" cy="92" rx="22" ry="15"/>
+    <text class="tag" x="154" y="120" text-anchor="middle">real self</text>
+    <path d="M100 22v86" stroke="#FBF3EA" stroke-width="2.6" stroke-dasharray="5 7" stroke-linecap="round" opacity=".9"/>
+    <text class="tag" x="100" y="14" text-anchor="middle" fill="#FBF3EA" opacity="1">the gap</text>
+  </svg>
+  </div>
+  <div class="leaf-body">
+    <h2 class="headline">The gap between two versions of me</h2>
+    <p class="line">My ideal self protects her health. My real self answers messages until two in the morning.</p>
+    <p class="line">Carl Rogers called that distance <em>incongruence</em>.</p>
+    <p class="line soft">I call it the small disappointment I feel every night before I sleep.</p>
+  </div>
+  <div class="foot"><span>The self</span><span class="pnum"></span></div>
+</article>
+
+<!-- ══════ 10 · THE LABEL ══════ -->
+<article class="leaf" style="--panel:#F8F0F3;--accent:#D98BA0" data-amb="#E2CDD6">
+  <div class="art">
+  <svg viewBox="0 0 200 130" preserveAspectRatio="xMidYMid meet" role="img" aria-label="She stands in front of a mirror and the reflection looking back is grey and slumped">
+    <rect x="-20" y="-20" width="240" height="170" fill="#D9C4CE"/>
+    <rect x="-20" y="106" width="240" height="60" fill="#C2A9B8"/>
+    <ellipse cx="140" cy="62" rx="42" ry="52" fill="#EFE3EA"/>
+    <ellipse cx="140" cy="62" rx="42" ry="52" fill="none" stroke="#C79FB0" stroke-width="6"/>
+    <path d="M126 114h28l6 14h-40z" fill="#C79FB0"/>
+    <g opacity=".5">
+      <path d="M140 34c-13 0-21 10-20 22 1 12-1 24-3 32h46c2-16 3-34-3-42a15 15 0 0 0-20-12z" fill="#8C7E96"/>
+      <circle cx="141" cy="46" r="13" fill="#CDB7B5"/>
+      <path d="M128 42c2-9 17-13 25-5-8-2-19-1-25 5z" fill="#8C7E96"/>
+      <path d="M136 48h4M145 48h4" stroke="#5A4C63" stroke-width="1.8" stroke-linecap="round"/>
+      <path d="M138 58c2-1.6 5-1.6 7 0" stroke="#5A4C63" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+      <path d="M126 88c0-16 6-26 15-26s15 10 15 26z" fill="#9F91A9"/>
+    </g>
+    <path class="hair" d="M44 28c-16 0-26 12-25 28 1 16-2 34-5 44h56c3-20 4-46-4-58a18 18 0 0 0-22-14z"/>
+    <circle class="skin" cx="46" cy="44" r="17"/>
+    <path class="hair" d="M29 40c2-13 23-17 34-6-11-3-25-1-34 6z"/>
+    <ellipse class="eye" cx="52" cy="47" rx="2.2" ry="2.8"/>
+    <ellipse class="eye" cx="41" cy="47" rx="2.2" ry="2.8"/>
+    <circle class="blush" cx="35" cy="54" r="4"/><circle class="blush" cx="59" cy="54" r="4"/>
+    <path d="M43 56h7" stroke="#3E3047" stroke-width="1.8" stroke-linecap="round" opacity=".55"/>
+    <path d="M26 106c0-28 9-44 22-44s22 16 22 44z" fill="#9DC0C5"/>
+    <path d="M78 62h16" stroke="#D98BA0" stroke-width="3" stroke-dasharray="4 5" stroke-linecap="round"/>
+  </svg>
+  </div>
+  <div class="leaf-body">
+    <h2 class="headline">On tired days, I believe the wrong one.</h2>
+    <div class="labels">
+      <p class="label no">I'm lazy.</p>
+      <p class="label yes">I slept four hours.</p>
+    </div>
+    <p class="line soft">Mistaking a temporary state for a permanent trait is how a habit quietly becomes an identity.</p>
+  </div>
+  <div class="foot"><span>The self</span><span class="pnum"></span></div>
+</article>
+
+<!-- ══════ 11 · SELF-AWARENESS ══════ -->
+<article class="leaf" style="--panel:#F7F1F4;--accent:#C27BA0" data-amb="#DFCAD6">
+  <div class="art">
+  <svg viewBox="0 0 200 130" preserveAspectRatio="xMidYMid meet" role="img" aria-label="She guesses how much she slept while the journal on her phone shows the real number">
+    <rect x="-20" y="-20" width="240" height="170" fill="#D8C2D0"/>
+    <rect x="-20" y="104" width="240" height="60" fill="#C3A9BA"/>
+    <path class="hair" d="M44 30c-16 0-26 12-25 28 1 16-2 34-5 42h56c3-20 4-46-4-58a18 18 0 0 0-22-12z"/>
+    <circle class="skin" cx="46" cy="46" r="17"/>
+    <path class="hair" d="M29 42c2-13 23-17 34-6-11-3-25-1-34 6z"/>
+    <ellipse class="eye" cx="52" cy="49" rx="2.2" ry="2.8"/>
+    <ellipse class="eye" cx="41" cy="49" rx="2.2" ry="2.8"/>
+    <circle class="blush" cx="35" cy="56" r="4"/><circle class="blush" cx="59" cy="56" r="4"/>
+    <path d="M43 59c2 1.6 5 1.6 7 0" stroke="#3E3047" stroke-width="1.8" fill="none" stroke-linecap="round" opacity=".6"/>
+    <path d="M26 104c0-26 9-42 22-42s22 16 22 42z" fill="#C6B0DE"/>
+    <circle cx="80" cy="44" r="3" fill="#FBF3EA" opacity=".9"/>
+    <circle cx="88" cy="36" r="4.5" fill="#FBF3EA" opacity=".9"/>
+    <ellipse cx="112" cy="24" rx="24" ry="16" fill="#FBF3EA"/>
+    <text x="112" y="29" text-anchor="middle" style="font-family:'Baloo 2',cursive;font-size:13px;font-weight:800;fill:#B089A0">7 hrs?</text>
+    <rect x="140" y="52" width="46" height="66" rx="9" fill="#FBF7F0"/>
+    <rect x="140" y="52" width="46" height="66" rx="9" fill="none" stroke="#C27BA0" stroke-width="3"/>
+    <text x="163" y="88" text-anchor="middle" style="font-family:'Baloo 2',cursive;font-size:21px;font-weight:800;fill:#C27BA0">4.5</text>
+    <text x="163" y="102" text-anchor="middle" style="font-family:'Baloo 2',cursive;font-size:8px;font-weight:700;fill:#9C8291">hours</text>
+    <path d="M98 70c12 4 24 2 36-6" stroke="#B089A0" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-dasharray="3 5"/>
+  </svg>
+  </div>
+  <div class="leaf-body">
+    <h2 class="headline">Can I trust what I think my sleep is like?</h2>
+    <p class="line">In one survey, 97 percent of people rated their own leadership as average or better. Ninety-seven percent cannot be above average.</p>
+    <p class="line">We rate ourselves kindly. So <em>I think I sleep about seven hours</em> is a guess, and a flattering one.</p>
+    <p class="line soft">That is why the journal asks for times, not opinions.</p>
+  </div>
+  <div class="foot"><span>The self</span><span class="pnum"></span></div>
+</article>
+
+<!-- ══════ 12 · THE JOURNAL ══════ -->
+<article class="leaf" style="--panel:#F4F7F3;--accent:#7FA98A" data-amb="#D6E3D6">
+  <div class="art">
+  <svg viewBox="0 0 200 130" preserveAspectRatio="xMidYMid meet" role="img" aria-label="She holds up a phone showing a week of intended sleep next to what she actually slept">
+    <rect x="-20" y="-20" width="240" height="170" fill="#BFD7C2"/>
+    <circle cx="100" cy="64" r="58" fill="#CFE3D0"/>
+    <rect x="20" y="88" width="14" height="16" rx="3" class="pot"/>
+    <path class="plant" d="M27 88c-7-3-10-10-9-17 7 2 10 9 9 17z"/>
+    <rect x="168" y="86" width="16" height="18" rx="3" class="pot"/>
+    <path class="plant" d="M176 86c8-5 10-14 6-21-6 4-8 13-6 21z"/>
+    <rect x="70" y="12" width="60" height="102" rx="12" fill="#FBF7F0"/>
+    <rect x="70" y="12" width="60" height="102" rx="12" fill="none" stroke="#7FA98A" stroke-width="3"/>
+    <rect x="90" y="18" width="20" height="3" rx="1.5" fill="#C9D8C6"/>
+    <text x="79" y="36" style="font-family:'Baloo 2',cursive;font-size:8px;font-weight:700;fill:#6E8F78">your week</text>
+    <g id="barchart"></g>
+    <path d="M78 98h44" stroke="#C9D8C6" stroke-width="2" stroke-linecap="round"/>
+    <path class="skin" d="M58 106c-4-14 2-24 10-26l4 10c-4 2-6 8-5 16z"/>
+    <path class="skin" d="M142 106c4-14-2-24-10-26l-4 10c4 2 6 8 5 16z"/>
+  </svg>
+  </div>
+  <div class="leaf-body">
+    <h2 class="headline">So I am building something small.</h2>
+    <p class="line soft">A sleep journal that asks three things:</p>
+    <ol class="steps">
+      <li>What time you meant to sleep</li>
+      <li>What time you actually slept, and what kept you awake</li>
+      <li>How you felt the next morning</li>
+    </ol>
+    <p class="line">After a week, it shows you your own gap. Not a lecture. Your own evidence.</p>
+    <a class="tryit" href="https://sleep-journal-gamma.vercel.app/" target="_blank" rel="noopener">Try it yourself →</a>
+  </div>
+  <div class="foot"><span>The idea</span><span class="pnum"></span></div>
+</article>
+
+<!-- ══════ 13 · WHAT SEVEN NIGHTS SHOWED ══════ -->
+<article class="leaf" style="--panel:#F2F6F3;--accent:#5E8F72" data-amb="#CFE0D4">
+  <div class="art">
+  <svg viewBox="0 0 200 130" preserveAspectRatio="xMidYMid meet" role="img" aria-label="A bar chart comparing intended sleep with actual sleep across seven nights">
+    <rect x="-20" y="-20" width="240" height="170" fill="#C6DCCD"/>
+    <rect x="16" y="10" width="168" height="104" rx="10" fill="#FBFDFA"/>
+    <g id="findingschart"></g>
+    <path d="M30 100h140" stroke="#CBDFD2" stroke-width="2.4" stroke-linecap="round"/>
+    <text x="30" y="26" style="font-family:'Baloo 2',cursive;font-size:9px;font-weight:700;fill:#5E8F72">intended vs actual</text>
+    <rect x="128" y="20" width="9" height="5" rx="2" fill="#D3E2D2"/>
+    <text x="141" y="25" style="font-family:'Baloo 2',cursive;font-size:7px;font-weight:600;fill:#7E9A87">meant</text>
+    <rect x="128" y="29" width="9" height="5" rx="2" fill="#5E8F72"/>
+    <text x="141" y="34" style="font-family:'Baloo 2',cursive;font-size:7px;font-weight:600;fill:#7E9A87">got</text>
+  </svg>
+  </div>
+  <div class="leaf-body">
+    <span class="samplenote" id="samplenote">Sample figures &mdash; replace with your results</span>
+    <h2 class="headline">What twenty-one nights showed</h2>
+    <div class="figrow">
+      <div class="fig"><b id="f-gap">&mdash;</b><span>hours lost to bedtime delay</span></div>
+      <div class="fig"><b id="f-avg">&mdash;</b><span>average hours slept</span></div>
+      <div class="fig"><b id="f-people">&mdash;</b><span>full weeks returned so far</span></div>
+    </div>
+    <p class="line">Three weeks, three different reasons: worrying, an unsettled schedule, scrolling. On <b>twenty of twenty-one nights</b>, someone slept later than they meant to.</p>
+    <p class="line soft">I assumed phones would lead. For one of us they did. The gap was the only thing all three of us shared.</p>
+  </div>
+  <div class="foot"><span>The findings</span><span class="pnum"></span></div>
+</article>
+
+<!-- ══════ 14 · A TARGET I CAN HIT ══════ -->
+<article class="leaf" style="--panel:#FBF4EE;--accent:#D98A54" data-amb="#EFD8C4">
+  <div class="art">
+  <svg viewBox="0 0 200 130" preserveAspectRatio="xMidYMid meet" role="img" aria-label="A small card listing three promises, beside a clock set to half past one">
+    <rect x="-20" y="-20" width="240" height="170" fill="#F3DCC6"/>
+    <rect x="-20" y="106" width="240" height="60" fill="#E4C5A9"/>
+    <rect x="22" y="16" width="96" height="88" rx="10" fill="#FFFBF4"/>
+    <rect x="22" y="16" width="96" height="88" rx="10" fill="none" stroke="#D98A54" stroke-width="3"/>
+    <circle cx="40" cy="42" r="7" fill="#D98A54"/><path d="M37 42l2.4 2.6L44 39" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="54" y="39" width="50" height="5" rx="2.5" fill="#EBD9C6"/>
+    <circle cx="40" cy="62" r="7" fill="#D98A54"/><path d="M37 62l2.4 2.6L44 59" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="54" y="59" width="42" height="5" rx="2.5" fill="#EBD9C6"/>
+    <circle cx="40" cy="82" r="7" fill="#D98A54"/><path d="M37 82l2.4 2.6L44 79" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="54" y="79" width="46" height="5" rx="2.5" fill="#EBD9C6"/>
+    <circle cx="156" cy="58" r="28" fill="#FFFBF4"/>
+    <circle cx="156" cy="58" r="28" fill="none" stroke="#D98A54" stroke-width="3.5"/>
+    <path d="M156 58V40M156 58l13 9" stroke="#8A6448" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="156" cy="58" r="3.4" fill="#8A6448"/>
+    <text x="156" y="100" text-anchor="middle" style="font-family:'Baloo 2',cursive;font-size:11px;font-weight:800;fill:#B06E3E">1:30 am</text>
+  </svg>
+  </div>
+  <div class="leaf-body">
+    <h2 class="headline">A target I can actually hit</h2>
+    <p class="line">My first instinct was &ldquo;sleep eight hours.&rdquo; On a shift that ends at 12:30, that was never a plan. It was a wish.</p>
+    <ul class="pledge">
+      <li>In bed by 1:30, not whenever</li>
+      <li>Phone charging across the room</li>
+      <li>Replies can wait until morning</li>
+    </ul>
+    <p class="line soft">Small, specific, and tied to a time. A goal without one is just a thing I would like.</p>
+  </div>
+  <div class="foot"><span>The change</span><span class="pnum"></span></div>
+</article>
+
+<!-- ══════ 15 · THE END ══════ -->
+<article class="leaf" style="--panel:#FDF6EC;--accent:#E8A45F" data-amb="#F1DFC6">
+  <div class="art">
+  <svg viewBox="0 0 200 130" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Morning at last. She sleeps peacefully while the phone charges on a dresser across the room and a bird sits on the windowsill.">
+    <rect x="-20" y="-20" width="240" height="170" fill="#FBE3C2"/>
+    <rect x="-20" y="100" width="240" height="60" fill="#EBC79C"/>
+    <rect x="124" y="4" width="62" height="58" rx="5" fill="#F9D49C"/>
+    <circle cx="155" cy="40" r="15" fill="#FCEBC4"/>
+    <path d="M155 18v-6M137 26l-4-4M173 26l4-4M133 44h-6M183 44h6" stroke="#F5C381" stroke-width="3" stroke-linecap="round"/>
+    <rect x="124" y="4" width="62" height="58" rx="5" fill="none" stroke="#FDF6EC" stroke-width="4"/>
+    <path d="M155 6v54M126 34h58" stroke="#FDF6EC" stroke-width="3.5"/>
+    <ellipse cx="176" cy="66" rx="7" ry="5" fill="#8FA9D4"/>
+    <circle cx="182" cy="62" r="4" fill="#8FA9D4"/>
+    <circle cx="183.5" cy="61" r=".9" fill="#3E3047"/>
+    <path d="M186 62l4 1-4 1.5z" fill="#E8A45F"/>
+    <path d="M124 62L86 112h100V62z" fill="#FBEAC8" opacity=".55"/>
+    <rect x="4" y="46" width="14" height="58" rx="5" class="wood"/>
+    <ellipse cx="42" cy="82" rx="26" ry="10" fill="#FFFBF3"/>
+    <path class="hair" d="M36 60c-18 0-30 10-30 21 0 4 1 7 3 9h60c2-6 2-13-2-18-6-9-17-12-31-12z"/>
+    <circle class="skin" cx="44" cy="74" r="16"/>
+    <path class="hair" d="M28 70c2-12 22-16 32-6-10-3-24-1-32 6z"/>
+    <path d="M36 74c2-2.6 5-2.6 7 0M48 74c2-2.6 5-2.6 7 0" stroke="#3E3047" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <circle class="blush" cx="34" cy="81" r="3.8"/><circle class="blush" cx="56" cy="81" r="3.8"/>
+    <path d="M42 83c1.8 1.8 3.8 1.8 5.6 0" stroke="#3E3047" stroke-width="1.7" fill="none" stroke-linecap="round" opacity=".65"/>
+    <path class="quilt" d="M60 90c16-12 42-14 64-7 14 5 26 4 36 7z"/>
+    <path class="quilt" d="M60 90h100v22H60z"/>
+    <circle cx="86" cy="100" r="2.4" fill="#F8D2D8"/><circle cx="110" cy="106" r="2.4" fill="#F8D2D8"/><circle cx="134" cy="98" r="2.4" fill="#F8D2D8"/>
+    <text class="zzz" x="64" y="52" fill="#D9A46B">z</text>
+    <text class="zzz" x="72" y="40" font-size="14" fill="#D9A46B">z</text>
+    <text class="zzz" x="84" y="26" font-size="17" fill="#D9A46B">z</text>
+    <rect x="168" y="80" width="30" height="26" rx="3" fill="#D8A87F"/>
+    <path d="M168 88h30" stroke="#C08F66" stroke-width="2"/>
+    <rect x="178" y="66" width="11" height="16" rx="2.5" fill="#B9C9DE"/>
+    <path d="M189 80c5 2 6 4 6 6" stroke="#A8B8CE" stroke-width="2" fill="none" stroke-linecap="round"/>
+  </svg>
+  </div>
+  <div class="leaf-body">
+    <p class="clock">6:00</p>
+    <div class="rule"></div>
+    <p class="line">For a long time I thought sleep was the one thing I could safely give up.</p>
+    <p class="line">I was giving up more than rest.</p>
+    <p class="line soft">Sleep well. Reply in the morning.</p>
+    <a class="tryit" href="https://sleep-journal-gamma.vercel.app/" target="_blank" rel="noopener">Start your own week →</a>
+  </div>
+  <div class="foot"><span>The end</span><span class="pnum"></span></div>
+</article>
+
+<!-- ══════ 16 · SOURCES ══════ -->
+<article class="leaf" style="--panel:#FBF6EE;--accent:#B98BC4" data-amb="#EDE2D2">
+  <div class="art">
+  <svg viewBox="0 0 200 130" preserveAspectRatio="xMidYMid meet" role="img" aria-label="An open book, a mug and a little plant">
+    <rect x="-20" y="-20" width="240" height="170" fill="#F2E6D6"/>
+    <ellipse cx="100" cy="104" rx="76" ry="12" fill="#E5D5C0"/>
+    <path d="M100 44c-14-9-34-11-52-8v50c18-3 38-1 52 8 14-9 34-11 52-8V36c-18-3-38-1-52 8z" fill="#FFFBF3"/>
+    <path d="M100 44c-14-9-34-11-52-8v50c18-3 38-1 52 8 14-9 34-11 52-8V36c-18-3-38-1-52 8z" fill="none" stroke="#C7A98C" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M100 44v50" stroke="#C7A98C" stroke-width="3"/>
+    <path d="M60 50h26M60 60h22M114 50h26M114 60h22" stroke="#D8C3AA" stroke-width="3" stroke-linecap="round"/>
+    <rect x="18" y="72" width="22" height="22" rx="4" fill="#E9A7A7"/>
+    <path d="M40 78c7 0 7 10 0 10" stroke="#E9A7A7" stroke-width="4" fill="none"/>
+    <path d="M24 66c-2-5 2-7 0-11M32 66c-2-5 2-7 0-11" stroke="#E3CDBB" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <rect x="162" y="72" width="20" height="22" rx="4" class="pot"/>
+    <path class="plant" d="M172 72c-9-4-13-13-11-22 9 3 13 12 11 22zM172 72c9-6 11-17 7-26-8 5-10 17-7 26z"/>
+  </svg>
+  </div>
+  <div class="leaf-body">
+    <h2 class="headline">Sources</h2>
+    <ul class="sources">
+      <li>Chang, A.-M., Aeschbach, D., Duffy, J. F., &amp; Czeisler, C. A. (2015). Evening use of light-emitting eReaders negatively affects sleep, circadian timing, and next-morning alertness. <em>PNAS, 112</em>(4), 1232–1237.</li>
+      <li>GMA Integrated News. (2024, July 31). <em>Filipinos are the most sleep-deprived in Southeast Asia — study.</em></li>
+      <li>Rogers, C. R. (1961). <em>On becoming a person.</em> Houghton Mifflin.</li>
+      <li>Macquarie University. (n.d.). <em>The challenge of self-awareness</em> [Course lecture, Professional development: Improve yourself, always]. Coursera.</li>
+      <li>Höhn, C., Hahn, M. A., Gruber, G., Pletzer, B., Cajochen, C., &amp; Hoedlmoser, K. (2024). Effects of evening smartphone use on sleep and declarative memory consolidation in male adolescents and young adults. <em>Brain Communications, 6</em>(3), fcae173.</li>
+    </ul>
+  </div>
+  <div class="foot"><span>Sources</span><span class="pnum"></span></div>
+</article>
+
+  <button class="zone prev" id="zprev" aria-label="Previous page"></button>
+  <button class="zone next" id="znext" aria-label="Next page"></button>
+</div>
+
+<div class="controls">
+  <button class="nav" id="prev" type="button">Back</button>
+  <div class="progress" id="progress" aria-hidden="true"></div>
+  <span class="count" id="count"></span>
+  <button class="nav" id="next" type="button">Next</button>
+</div>
+
+<p class="hint" id="hint">Tap the page, or use your arrow keys</p>
+<p class="sr" aria-live="polite" id="live"></p>
+
+<script>
+(function(){
+  var NS = 'http://www.w3.org/2000/svg';
+
+  /* ---- page 6 · a hundred little people, fifty-six awake, one of them her ---- */
+  (function(){
+    var g = document.getElementById('dotgrid');
+    if(!g) return;
+    var cols = 16, rows = 6, lit = 56, me = 34, n = 0;
+    var x0 = 12, y0 = 16, dx = 11.8, dy = 18.5;
+
+    for(var r = 0; r < rows; r++){
+      for(var c = 0; c < cols; c++){
+        if(n >= 96) break;
+        var x = x0 + c * dx, y = y0 + r * dy;
+        var on = n < lit, mine = (n === me);
+
+        var hair = document.createElementNS(NS,'path');
+        hair.setAttribute('d','M'+(x-4.4)+','+(y+1)+'c-.5-5 1.8-8 4.4-8s4.9 3 4.4 8c1 2 1.2 4 1 5.6h-11c-.2-1.6 0-3.6 1-5.6z');
+        hair.setAttribute('fill', on ? '#E08769' : '#D8C6B4');
+        hair.setAttribute('opacity', mine ? '1' : (on ? '.85' : '.7'));
+
+        var head = document.createElementNS(NS,'circle');
+        head.setAttribute('cx', x); head.setAttribute('cy', y); head.setAttribute('r','3.2');
+        head.setAttribute('fill', on ? '#F2C7A6' : '#EDE0D2');
+
+        var bod = document.createElementNS(NS,'path');
+        bod.setAttribute('d','M'+(x-4.4)+','+(y+13)+'a4.4 4.4 0 0 1 8.8 0z');
+        bod.setAttribute('fill', on ? '#E08769' : '#DCCCBB');
+        bod.setAttribute('opacity', mine ? '1' : (on ? '.9' : '.75'));
+
+        g.appendChild(hair); g.appendChild(head); g.appendChild(bod);
+
+        if(mine){
+          var ring = document.createElementNS(NS,'circle');
+          ring.setAttribute('cx', x); ring.setAttribute('cy', y + 5); ring.setAttribute('r','12');
+          ring.setAttribute('fill','none'); ring.setAttribute('stroke','#C9603E');
+          ring.setAttribute('stroke-width','2'); ring.setAttribute('opacity','.75');
+          g.appendChild(ring);
+
+          var tag = document.createElementNS(NS,'text');
+          tag.setAttribute('x', x); tag.setAttribute('y', y - 10);
+          tag.setAttribute('text-anchor','middle');
+          tag.setAttribute('class','tag hot');
+          tag.textContent = 'me';
+          g.appendChild(tag);
+        }
+        n++;
+      }
+    }
+  })();
+
+  /* ══════════════════════════════════════════════════════════════
+     YOUR PILOT RESULTS — EDIT THIS BLOCK, NOTHING ELSE
+     Set isSample to false once your real numbers are in; that
+     removes the orange "sample figures" label from the page.
+     ══════════════════════════════════════════════════════════════ */
+  var PILOT = {
+    isSample  : false,         // real pilot data, updated 30 Oct 2026
+    people    : 3,             // complete seven-night weeks returned so far
+    hoursLost : 61.7,          // total hours lost to bedtime delay, all three weeks
+    avgSlept  : '7.0',         // average hours actually slept per night, 21 nights
+    topReason : 'worrying',    // named on 7 of 21 nights, just ahead of scrolling (5)
+    // one participant's seven nights, Thu 15 - Wed 21 Oct
+    intended  : [7.0, 10.5, 10.5, 9.1, 9.0, 8.8, 9.5],
+    actual    : [5.0,  8.9,  7.7, 8.1, 8.0, 6.0, 8.5]
+  };
+
+  /* ---- findings page · fill the numbers and draw the chart ---- */
+  (function(){
+    var set = function(id, v){ var el = document.getElementById(id); if (el) el.textContent = v; };
+    set('f-gap', PILOT.hoursLost);
+    set('f-avg', PILOT.avgSlept);
+    set('f-people', PILOT.people);
+    set('f-reason', PILOT.topReason);
+    if (!PILOT.isSample){
+      var n = document.getElementById('samplenote');
+      if (n) n.style.display = 'none';
+    }
+    var g = document.getElementById('findingschart');
+    if (!g) return;
+    var x0 = 36, w = 7, gap = 19, base = 100, scale = 8.2;
+    for (var i = 0; i < PILOT.intended.length; i++){
+      var x = x0 + i * gap;
+      var a = document.createElementNS(NS, 'rect');
+      a.setAttribute('x', x); a.setAttribute('y', base - PILOT.intended[i] * scale);
+      a.setAttribute('width', w); a.setAttribute('height', PILOT.intended[i] * scale);
+      a.setAttribute('rx', '3'); a.setAttribute('fill', '#D3E2D2');
+      var b = document.createElementNS(NS, 'rect');
+      b.setAttribute('x', x + w + 1.5); b.setAttribute('y', base - PILOT.actual[i] * scale);
+      b.setAttribute('width', w); b.setAttribute('height', PILOT.actual[i] * scale);
+      b.setAttribute('rx', '3'); b.setAttribute('fill', '#5E8F72');
+      g.appendChild(a); g.appendChild(b);
+    }
+  })();
+
+  /* ---- page 11 · intended sleep beside actual sleep, seven nights ---- */
+  (function(){
+    var g = document.getElementById('barchart');
+    if(!g) return;
+    var intended = [8.0, 7.5, 8.0, 7.5, 8.0, 8.5, 8.0];
+    var actual   = [5.2, 4.4, 6.0, 4.0, 5.5, 7.0, 6.4];
+    var x0 = 79, w = 4.4, gap = 6.4, base = 96, scale = 5.6;
+
+    for(var i = 0; i < intended.length; i++){
+      var x = x0 + i * gap;
+      var a = document.createElementNS(NS,'rect');
+      a.setAttribute('x', x); a.setAttribute('y', base - intended[i] * scale);
+      a.setAttribute('width', w); a.setAttribute('height', intended[i] * scale);
+      a.setAttribute('rx','2.2'); a.setAttribute('fill','#D3E2D2');
+      var b = document.createElementNS(NS,'rect');
+      b.setAttribute('x', x); b.setAttribute('y', base - actual[i] * scale);
+      b.setAttribute('width', w); b.setAttribute('height', actual[i] * scale);
+      b.setAttribute('rx','2.2'); b.setAttribute('fill','#7FA98A');
+      g.appendChild(a); g.appendChild(b);
+    }
+  })();
+
+  /* ---- the book ---- */
+  var leaves   = Array.prototype.slice.call(document.querySelectorAll('.leaf'));
+  var total    = leaves.length;
+  var i        = 0;
+  var progress = document.getElementById('progress');
+  var count    = document.getElementById('count');
+  var hint     = document.getElementById('hint');
+  var live     = document.getElementById('live');
+  var btnPrev  = document.getElementById('prev');
+  var btnNext  = document.getElementById('next');
+
+  leaves.forEach(function(leaf, n){
+    var p = leaf.querySelector('.pnum');
+    if(p) p.textContent = String(n).padStart(2,'0');
+    var t = document.createElement('span');
+    t.className = 'tick';
+    progress.appendChild(t);
+  });
+  var ticks = Array.prototype.slice.call(progress.children);
+
+  function render(){
+    leaves.forEach(function(leaf, n){
+      var turned = n < i;
+      leaf.classList.toggle('is-turned', turned);
+      leaf.style.zIndex = turned ? n : (total - n);
+      leaf.setAttribute('aria-hidden', n === i ? 'false' : 'true');
+      leaf.inert = (n !== i);
+    });
+    ticks.forEach(function(t, n){ t.classList.toggle('seen', n <= i); });
+    document.body.style.background = leaves[i].dataset.amb || '#E7E1F2';
+    count.textContent = (i + 1) + ' / ' + total;
+    btnPrev.disabled = (i === 0);
+    btnNext.disabled = (i === total - 1);
+    live.textContent = 'Page ' + (i + 1) + ' of ' + total;
+  }
+
+  function go(n){
+    var next = Math.max(0, Math.min(total - 1, n));
+    if(next === i) return;
+    i = next; hint.classList.add('gone'); render();
+  }
+
+  document.getElementById('znext').addEventListener('click', function(){ go(i + 1); });
+  document.getElementById('zprev').addEventListener('click', function(){ go(i - 1); });
+
+  /* Tap either half of the book to turn a page - unless the tap landed on a
+     link or button, which must do its own job instead of flipping the page. */
+  document.getElementById('book').addEventListener('click', function(e){
+    if (e.target.closest('a, button')) return;
+    var box = this.getBoundingClientRect();
+    go(e.clientX < box.left + box.width / 2 ? i - 1 : i + 1);
+  });
+  btnNext.addEventListener('click', function(){ go(i + 1); });
+  btnPrev.addEventListener('click', function(){ go(i - 1); });
+
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'ArrowRight' || e.key === 'PageDown'){ e.preventDefault(); go(i + 1); }
+    if(e.key === 'ArrowLeft'  || e.key === 'PageUp'  ){ e.preventDefault(); go(i - 1); }
+    if(e.key === 'Home'){ e.preventDefault(); go(0); }
+    if(e.key === 'End'){  e.preventDefault(); go(total - 1); }
+  });
+
+  var tx = null, ty = null;
+  var book = document.getElementById('book');
+  book.addEventListener('touchstart', function(e){
+    tx = e.changedTouches[0].clientX; ty = e.changedTouches[0].clientY;
+  }, {passive:true});
+  book.addEventListener('touchend', function(e){
+    if(tx === null) return;
+    var dx = e.changedTouches[0].clientX - tx;
+    var dy = e.changedTouches[0].clientY - ty;
+    if(Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) go(dx < 0 ? i + 1 : i - 1);
+    tx = ty = null;
+  }, {passive:true});
+
+  /* the artwork now fits rather than fills, so extend each scene's own
+     background colour across its whole panel - no bare letterbox edges */
+  (function(){
+    document.querySelectorAll('.art').forEach(function(art){
+      var svg = art.querySelector('svg'); if(!svg) return;
+      var bg = svg.querySelector('rect[fill^="#"]');
+      if(bg) art.style.setProperty('--artbg', bg.getAttribute('fill'));
+    });
+  })();
+
+
+  /* ── fit pass ───────────────────────────────────────────────
+     Breakpoints cannot know how tall a given page's text will be,
+     so measure it. The illustration yields precisely the height
+     the words are short by, down to a floor. Runs on load, on
+     resize and whenever the type finishes loading.             */
+  function fitLeaves(){
+    document.querySelectorAll('.leaf').forEach(function(leaf){
+      var art  = leaf.querySelector('.art');
+      var body = leaf.querySelector('.leaf-body');
+      if(!art || !body) return;
+      art.style.height = '';                       // back to the CSS value
+      body.classList.remove('tight');
+      for(var pass = 0; pass < 3; pass++){
+        var deficit = body.scrollHeight - body.clientHeight;
+        if(deficit <= 1) break;
+        var current = art.getBoundingClientRect().height;
+        var next    = Math.max(64, current - deficit - 4);
+        if(next >= current) break;                 // already at the floor
+        art.style.height = next + 'px';
+      }
+      // stage two: the picture has given all it can, so compact the type
+      if(body.scrollHeight - body.clientHeight > 1){
+        body.classList.add('tight');
+        for(var p2 = 0; p2 < 2; p2++){
+          var d2 = body.scrollHeight - body.clientHeight;
+          if(d2 <= 1) break;
+          var cur2 = art.getBoundingClientRect().height;
+          var nx2  = Math.max(52, cur2 - d2 - 4);
+          if(nx2 >= cur2) break;
+          art.style.height = nx2 + 'px';
+        }
+      }
+    });
+  }
+
+  var fitTimer;
+  window.addEventListener('resize', function(){
+    clearTimeout(fitTimer); fitTimer = setTimeout(fitLeaves, 120);
+  });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitLeaves);
+  window.addEventListener('load', fitLeaves);
+  fitLeaves();
+
+  render();
+})();
+</script>
+</body>
+</html>
